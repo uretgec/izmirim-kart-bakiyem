@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="İzmirim Kartlarınızı kayıt edip tek ekranda bakiyelerini takip edebileceğiniz basit bir websitesidir.">
+    <title>İzmirim Kartlarım</title>
+</head>
+    <body>
+        <main>
+            <div class="container px-4 py-5">
+                <h2 class="pb-2">
+                    Kartlarım
+                    <span class="badge text-bg-info">
+                        <a href="#"><i class="bi plus-circle">Ekle</i></a>
+                    </span>
+                </h2>
+                <!-- Card Block Add -->
+                <form>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="floatingCardName" placeholder="İzmirim Kart İsmi">
+                        <label for="floatingCardName">İzmirim Kart İsmi</label>
+                    </div>
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="floatingCardNumber" placeholder="İzmirim Kart Numarası">
+                        <label for="floatingCardNumber">İzmirim Kart Numarası</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary d-block">Ekle</button>
+                </form>
+                <!-- Card Block Add -->
+
+                <!-- Card Block Info -->
+                <div class="card" id="card-1-main">
+                    <div class="card-body">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="card-title">Kartın Adı</h5>
+                            <span class="badge text-bg-info">
+                                <a href="#"><i class="bi bi-arrow-clockwise">Refresh</i></a>
+                            </span>
+                        </div>
+                        <div class="d-flex w-100 justify-content-between">
+                            <h3 class="card-title">224,15</h3>
+                            <p class="card-text">
+                                <small class="text-body-secondary">
+                                    10.08.2024<br>11:37:29
+                                </small>
+                            </p>
+                        </div>
+                    </div>
+                    <ul id="card-1-detail" class="list-group list-group-flush d-none">
+                      <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Kart No
+                        <span class="badge text-bg-light">
+                            2023-1212-12
+                        </span>
+                      </li>
+                      <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Bekleyen Yüklemeler
+                        <span class="badge text-bg-light">
+                            -------<br>
+                            -------<br>
+                            -------
+                        </span>
+                      </li>
+                      <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Son Harcanan Tutar
+                        <span class="badge text-bg-light">
+                            45,03
+                        </span>
+                      </li>
+                      <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Son Yükleme Tarihi
+                        <span class="badge text-bg-light">
+                            09.08.2024 12:34:16
+                        </span>
+                      </li>
+                      <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Son Yüklenen Tutar
+                        <span class="badge text-bg-light">
+                            200
+                        </span>
+                      </li>
+                    </ul>
+                    <div class="card-body">
+                        <a href="#" class="btn btn-small btn-danger">Delete</a>
+                    </div>
+                </div>
+                <!-- Card Block Info -->
+            </div>
+        </main>
+    </body>
+</html>
