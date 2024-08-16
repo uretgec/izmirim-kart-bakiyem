@@ -123,7 +123,7 @@ document.addEventListener('alpine:init', () => {
                         this.izCards[cardNumber]["liveData"] = response
 
                         // show card detail
-                        this.toggleCardDetail()
+                        // this.toggleCardDetail()
 
                         // update card border
                         this.toggleCardUpdate(cardNumber)
@@ -167,6 +167,7 @@ document.addEventListener('alpine:init', () => {
             }, 3000)
         },
 
+        // not use
         splitDate() {
             let lastUpdateDate = this.$el.getAttribute("data-last-update")
 

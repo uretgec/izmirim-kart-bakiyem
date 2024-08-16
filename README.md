@@ -5,9 +5,15 @@
 ## Özellikler ##
 
 - [Açık Veri Portalı->İzmirim Kart Bakiye Sorgulama](https://acikveri.bizizmir.com/tr/dataset/izmirim-kart-bakiye-sorgulama/resource/4f6b8d92-bf86-4707-98d4-6f1b29758062) adresindeki açık api kullanılmakta.
-- Dilediğiniz kadar kartı ekleyip bakiye sorgusu yapabilirsiniz.
-- Tarayıcı üzerinde çalışır ve localstorage özelliğini kullanır.
-- Veriler açtığınız tarayıcı üzerinde kalır.
+- Dilediğiniz kadar kartı ekleyip bakiye sorgusu yapabilirsiniz. (Sayfalama sistemi yok ne yazik ki)
+- Tarayıcı üzerinde çalışır ve localstorage özelliğini kullanır. (Veriler açtığınız tarayıcı üzerinde kalır. )
+- Kartlarınız son güncelleme tarihine göre listelenir.
+- Api tarafından verilen tüm bilgiler görüntülenir.
+
+### Eksikler ###
+
+- [] Localstorage entegresi
+- [] Kartlarım sıralaması (sıralama lat update time a göre yapılmalı)
 
 ### Altyapı ###
 
