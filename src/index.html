@@ -5,88 +5,113 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="İzmirim Kartlarınızı kayıt edip tek ekranda bakiyelerini takip edebileceğiniz basit bir websitesidir.">
     <title>İzmirim Kartlarım</title>
+
+    <link href="assets/css/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+
+    <script defer src="assets/js/mask.alpine.min.js"></script>
+    <script defer src="assets/js/persist.alpine.min.js"></script>
+    <script defer src="assets/js/sort.alpine.min.js"></script>
+    <script defer src="assets/js/csp.alpine.min.js"></script>
+    <script src="assets/js/main.js"></script>
+
 </head>
-    <body>
+    <body x-data="izCardManager">
         <main>
-            <div class="container px-4 py-5">
-                <h2 class="pb-2">
+            <div class="container px-3 py-3">
+                <h2 class="pb-2 border-bottom">
                     Kartlarım
-                    <span class="badge text-bg-info">
-                        <a href="#"><i class="bi plus-circle">Ekle</i></a>
-                    </span>
+                    <button @click="showNewCardForm" type="button" class="btn btn-sm btn-dark float-end"><i class="bi bi-plus-circle"></i></a>
                 </h2>
+                <template aria-label="alert-box" x-if="alertBox" x-transition>
+                    <div x-bind:class="alertType" class="alert">
+                        <p x-text="alertMessage"></p>
+                    </div>
+                </template>
+
                 <!-- Card Block Add -->
-                <form>
-                    <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="floatingCardName" placeholder="İzmirim Kart İsmi">
-                        <label for="floatingCardName">İzmirim Kart İsmi</label>
+                <template x-if="newCardForm" x-transition>
+                    <div class="card mb-3" id="card-new">
+                        <div class="card-body">
+                            <!-- <form id="addCard"> -->
+                                <h5 class="card-title">
+                                    Yeni Kart
+                                    <button @click="removeNewCardForm" type="button" class="btn btn-sm btn-danger position-absolute top-0 end-0"><i class="bi bi-x"></i></a>
+                                </h5>
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" id="izCardName" placeholder="İzmirim Kart İsmi" name="izCardName">
+                                    <label for="izCardName">İzmirim Kart İsmi</label>
+                                </div>
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="izCardNumber" placeholder="İzmirim Kart Numarası" name="izCardNumber" x-mask="99999-99999-9">
+                                    <label for="izCardNumber">İzmirim Kart Numarası</label>
+                                </div>
+                                <div class="d-grid gap-2 mt-3">
+                                    <button @click="addCard" type="button" class="btn btn-success d-block">Ekle</button>
+                                </div>
+                            <!-- </form> -->
+                        </div>
                     </div>
-                    <div class="form-floating">
-                        <input type="text" class="form-control" id="floatingCardNumber" placeholder="İzmirim Kart Numarası">
-                        <label for="floatingCardNumber">İzmirim Kart Numarası</label>
-                    </div>
-                    <button type="submit" class="btn btn-primary d-block">Ekle</button>
-                </form>
+                </template>
                 <!-- Card Block Add -->
 
                 <!-- Card Block Info -->
-                <div class="card" id="card-1-main">
-                    <div class="card-body">
-                        <div class="d-flex w-100 justify-content-between">
-                            <h5 class="card-title">Kartın Adı</h5>
-                            <span class="badge text-bg-info">
-                                <a href="#"><i class="bi bi-arrow-clockwise">Refresh</i></a>
-                            </span>
+                <template x-for="(cardData, cardNumber) in izCards">
+                    <div x-bind:id="cardNumber" class="card mb-3">
+                        <div class="card-body">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h5 class="card-title" x-text="cardData.cardName"></h5>
+                                <button x-bind:data-card-number="cardNumber" data-refresh="true" @click="getCard" type="button" class="btn btn-large btn-light position-absolute top-0 end-0"><i class="bi bi-arrow-clockwise"></i></a>
+                            </div>
+                            <div class="d-flex w-100 justify-content-between">
+                                <h3><span class="h1" x-text="cardData.liveData.UlasimKartBakiyesi.MevcutBakiye"></span> <small>TL</small></h3>
+                                <p class="card-text text-center">
+                                    <small class="text-body-secondary" x-bind:data-last-update="cardData.liveData.UlasimKartBakiyesi.SonIslemTarihi" x-html="splitDate"></small>
+                                </p>
+                            </div>
                         </div>
-                        <div class="d-flex w-100 justify-content-between">
-                            <h3 class="card-title">224,15</h3>
-                            <p class="card-text">
-                                <small class="text-body-secondary">
-                                    10.08.2024<br>11:37:29
-                                </small>
-                            </p>
+                        <div class="card-footer m-0 p-0">
+                            <div class="d-grid gap-2">
+                                <button @click="toggleCardDetail" x-bind:data-card-number="cardNumber" class="btn btn-sm btn-light"><i class="bi bi-caret-down"></i></button>
+                            </div>
+                        </div>
+                        <ul x-bind:data-card-number="cardNumber" x-bind:id="generateDetailSelector" class="list-group list-group-flush d-none">
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <small>Kart No</small>
+                                <span class="badge text-bg-light" x-text="cardNumber"></span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <small>Bekleyen Yüklemeler</small>
+                                <span class="badge text-bg-light" x-text="cardData.liveData.UlasimKartBakiyesi.BekleyenYuklemeler"></span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <small>Son Harcanan Tutar</small>
+                                <span class="badge text-bg-light" x-text="cardData.liveData.UlasimKartBakiyesi.SonHarcananTutar"></span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <small>Son Yükleme Tarihi</small>
+                                <span class="badge text-bg-light" x-text="cardData.liveData.UlasimKartBakiyesi.SonYuklemeTarihi"></span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <small>Son Yüklenen Tutar</small>
+                                <span class="badge text-bg-light" x-text="cardData.liveData.UlasimKartBakiyesi.SonYuklenenTutar"></span>
+                            </li>
+                        </ul>
+                        <div x-bind:data-card-number="cardNumber" x-bind:id="generateDeleteSelector" class="card-footer m-0 p-0 d-none">
+                            <div class="d-grid gap-2">
+                                <button @click="delCard" x-bind:data-card-number="cardNumber" type="button" class="btn btn-sm btn-danger">Delete</a>
+                            </div>
                         </div>
                     </div>
-                    <ul id="card-1-detail" class="list-group list-group-flush d-none">
-                      <li class="list-group-item d-flex justify-content-between align-items-center">
-                        Kart No
-                        <span class="badge text-bg-light">
-                            2023-1212-12
-                        </span>
-                      </li>
-                      <li class="list-group-item d-flex justify-content-between align-items-center">
-                        Bekleyen Yüklemeler
-                        <span class="badge text-bg-light">
-                            -------<br>
-                            -------<br>
-                            -------
-                        </span>
-                      </li>
-                      <li class="list-group-item d-flex justify-content-between align-items-center">
-                        Son Harcanan Tutar
-                        <span class="badge text-bg-light">
-                            45,03
-                        </span>
-                      </li>
-                      <li class="list-group-item d-flex justify-content-between align-items-center">
-                        Son Yükleme Tarihi
-                        <span class="badge text-bg-light">
-                            09.08.2024 12:34:16
-                        </span>
-                      </li>
-                      <li class="list-group-item d-flex justify-content-between align-items-center">
-                        Son Yüklenen Tutar
-                        <span class="badge text-bg-light">
-                            200
-                        </span>
-                      </li>
-                    </ul>
-                    <div class="card-body">
-                        <a href="#" class="btn btn-small btn-danger">Delete</a>
-                    </div>
-                </div>
+                </template>
                 <!-- Card Block Info -->
             </div>
         </main>
+        <div class="container">
+            <footer class="pt-3 my-3 text-body-secondary text-center border-top">
+                <p>&copy; 2024 İzmirim Kart Bakiye Sorgulama</p>
+                <p><a href="https://acikveri.bizizmir.com/tr/dataset/izmirim-kart-bakiye-sorgulama/resource/4f6b8d92-bf86-4707-98d4-6f1b29758062" target="_blank">Açık Veri Portalı->İzmirim Kart Bakiye Sorgulama</a> servisini kullanan açık kaynak bir web sayfasıdır.</p>
+            </footer>
+        </div>
     </body>
 </html>
