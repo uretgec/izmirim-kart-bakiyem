@@ -76,10 +76,7 @@ document.addEventListener('alpine:init', () => {
                     .then(response => {
                         if (response.hasOwnProperty("HataVarMi") && !response.HataVarMi) {
                             // add card data
-                            this.izCards[cardNumber] = {
-                                "cardName": cardName,
-                                "liveData" : response
-                            }
+                            this._updateCardData(cardName, cardNumber, response)
     
                             console.log("izCards", this.izCards, this.$persist)
                             // TODO: add to localstorage before data has to make json stringfy
@@ -119,18 +116,23 @@ document.addEventListener('alpine:init', () => {
                 this.fetchCardDataFromApi(cardNumber)
                     .then(resp => resp.json())
                     .then(response => {
-                        // update card data
-                        this.izCards[cardNumber]["liveData"] = response
+                        if (response.hasOwnProperty("HataVarMi") && !response.HataVarMi) {
+                            // update card data
+                            this._updateCardData(this.izCards[cardNumber].cardName, cardNumber, response)
 
-                        // show card detail
-                        // this.toggleCardDetail()
+                            // show card detail
+                            // this.toggleCardDetail()
 
-                        // update card border
-                        this.toggleCardUpdate(cardNumber)
+                            // update card border
+                            this.toggleCardUpdate(cardNumber)
 
-                        // TODO: add to localstorage before data has to make json stringfy
+                            console.log("izCards", this.izCards, this.$persist)
+                            // TODO: add to localstorage before data has to make json stringfy
 
-                        return this.izCards[cardNumber]
+                            return this.izCards[cardNumber]
+                        } else {
+                            this.showAlertBox("warning", "Şu an kart bakiye bilgisine ulaşılamıyor.", 5000)
+                        }
                     })
                     .catch(error => {
                         // alert show error message
@@ -139,6 +141,32 @@ document.addEventListener('alpine:init', () => {
             } else {
                 return this.izCards[cardNumber]
             }
+        },
+
+        _updateCardData(cardName, cardNumber, cardData) {
+            // update last update time
+            let lastUpdateTime = this.__customDateParse(cardData.UlasimKartBakiyesi.SonIslemTarihi)
+            let lastUpdateTime2 = this.__customDateParse(cardData.UlasimKartBakiyesi.SonYuklemeTarihi)
+            console.log("Parse Date", lastUpdateTime, lastUpdateTime2)
+            if (lastUpdateTime2 > lastUpdateTime) {
+                lastUpdateTime = lastUpdateTime2
+            }
+
+            if (lastUpdateTime === null) {
+                lastUpdateTime = 0
+            }
+
+            // update izCards object
+            this.izCards[cardNumber] = {
+                "cardName" : cardName,
+                "liveData" : cardData.UlasimKartBakiyesi,
+                "updateTime" : lastUpdateTime,
+            }
+
+            // sort card data
+            this.izCards = Object.entries(this.izCards).sort((a,b) => {
+                return b[1].updateTime - a[1].updateTime
+            }).reduce((r, [k, v]) => ({ ...r, [k]: v }), {})
         },
 
         listCards() {
@@ -167,8 +195,23 @@ document.addEventListener('alpine:init', () => {
             }, 3000)
         },
 
+        // custom date: 17.08.2024 14:51:07 - dd.MM.yyyy HH:mm:ss
+        __customDateParse(customDate) {
+            console.log("customDate", customDate)
+            if (customDate === 0 || customDate === null) {
+                return 0
+            }
+
+            let strDate = customDate.replaceAll(".", "-").replace(/-/g,":").replace(/ /g,":").split(":")
+            // year: number, monthIndex: number, date?: number, hours?: number, minutes?: number, seconds?: number, ms?: number
+            let aDate = new Date(strDate[2], strDate[1]-1, strDate[0], strDate[3], strDate[4], strDate[5])
+            
+            console.log("aDate", aDate, aDate.getTime())
+            return aDate.getTime()
+        },
+
         // not use
-        splitDate() {
+        __splitDate() {
             let lastUpdateDate = this.$el.getAttribute("data-last-update")
 
             let updateDateArr = lastUpdateDate.split(" ")

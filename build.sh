@@ -57,7 +57,7 @@ fi
 cd alpine && npm run build
 cp packages/csp/dist/cdn.min.js ../../src/assets/js/csp.alpine.min.js 
 cp packages/mask/dist/cdn.min.js ../../src/assets/js/mask.alpine.min.js
-cp packages/sort/dist/cdn.min.js ../../src/assets/js/sort.alpine.min.js
+# cp packages/sort/dist/cdn.min.js ../../src/assets/js/sort.alpine.min.js
 cp packages/persist/dist/cdn.min.js ../../src/assets/js/persist.alpine.min.js
 cd ..
 

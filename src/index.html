@@ -10,8 +10,7 @@
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
 
     <script defer src="assets/js/mask.alpine.min.js"></script>
-    <!-- <script defer src="assets/js/persist.alpine.min.js"></script> -->
-    <!-- <script defer src="assets/js/sort.alpine.min.js"></script> -->
+    <script defer src="assets/js/persist.alpine.min.js"></script>
     <script defer src="assets/js/csp.alpine.min.js"></script>
     <script src="assets/js/main.js"></script>
 
@@ -56,54 +55,54 @@
                 <!-- Card Block Add -->
 
                 <!-- Card Block Info -->
-                <template x-for="(cardData, cardNumber) in izCards">
-                    <div x-bind:id="cardNumber" class="card mb-3">
+                <template x-for="cardData in listCards" :key="cardData.liveData.UlasimKartiNumarasi">
+                    <div x-bind:id="cardData.liveData.UlasimKartiNumarasi" class="card mb-3">
                         <div class="card-body">
                             <div class="d-flex w-100 justify-content-between">
                                 <h5 class="card-title" x-text="cardData.cardName"></h5>
                                 
-                                <button x-bind:data-card-number="cardNumber" data-refresh="true" @click="getCard" type="button" class="btn btn-large btn-light position-absolute top-0 end-0"><i class="bi bi-arrow-clockwise"></i></a>
+                                <button x-bind:data-card-number="cardData.liveData.UlasimKartiNumarasi" data-refresh="true" @click="getCard" type="button" class="btn btn-large btn-light position-absolute top-0 end-0"><i class="bi bi-arrow-clockwise"></i></a>
                             </div>
                             <div class="d-flex w-100 justify-content-between">
-                                <h3><span class="h1" x-text="cardData.liveData.UlasimKartBakiyesi.MevcutBakiye"></span> <small>TL</small></h3>
+                                <h3><span class="h1" x-text="cardData.liveData.MevcutBakiye"></span> <small>TL</small></h3>
                             </div>
                             <div class="d-flex w-100 justify-content-between">
-                                <small class="text-body-secondary" x-text="cardNumber"></small>
+                                <small class="text-body-secondary" x-text="cardData.liveData.UlasimKartiNumarasi"></small>
                                 <p class="card-text text-center">
-                                    <small class="text-body-secondary" x-text="cardData.liveData.UlasimKartBakiyesi.SonIslemTarihi"></small>
+                                    <small class="text-body-secondary" x-text="cardData.liveData.SonIslemTarihi"></small>
                                 </p>
                             </div>
                         </div>
                         <div class="card-footer m-0 p-0">
                             <div class="d-grid gap-2">
-                                <button @click="toggleCardDetail" x-bind:data-card-number="cardNumber" class="btn btn-sm btn-light"><i class="bi bi-caret-down"></i></button>
+                                <button @click="toggleCardDetail" x-bind:data-card-number="cardData.liveData.UlasimKartiNumarasi" class="btn btn-sm btn-light"><i class="bi bi-caret-down"></i></button>
                             </div>
                         </div>
-                        <ul x-bind:data-card-number="cardNumber" x-bind:id="generateDetailSelector" class="list-group list-group-flush d-none">
+                        <ul x-bind:data-card-number="cardData.liveData.UlasimKartiNumarasi" x-bind:id="generateDetailSelector" class="list-group list-group-flush d-none">
                             <li class="list-group-item d-flex justify-content-between align-items-center">
                                 <small>Kart No</small>
-                                <span class="badge text-bg-light" x-text="cardNumber"></span>
+                                <span class="badge text-bg-light" x-text="cardData.liveData.UlasimKartiNumarasi"></span>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center">
                                 <small>Bekleyen Yüklemeler</small>
-                                <span class="badge text-bg-light" x-text="cardData.liveData.UlasimKartBakiyesi.BekleyenYuklemeler"></span>
+                                <span class="badge text-bg-light" x-text="cardData.liveData.BekleyenYuklemeler"></span>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center">
                                 <small>Son Harcanan Tutar</small>
-                                <span class="badge text-bg-light" x-text="cardData.liveData.UlasimKartBakiyesi.SonHarcananTutar"></span>
+                                <span class="badge text-bg-light" x-text="cardData.liveData.SonHarcananTutar"></span>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center">
                                 <small>Son Yükleme Tarihi</small>
-                                <span class="badge text-bg-light" x-text="cardData.liveData.UlasimKartBakiyesi.SonYuklemeTarihi"></span>
+                                <span class="badge text-bg-light" x-text="cardData.liveData.SonYuklemeTarihi"></span>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center">
                                 <small>Son Yüklenen Tutar</small>
-                                <span class="badge text-bg-light" x-text="cardData.liveData.UlasimKartBakiyesi.SonYuklenenTutar"></span>
+                                <span class="badge text-bg-light" x-text="cardData.liveData.SonYuklenenTutar"></span>
                             </li>
                         </ul>
-                        <div x-bind:data-card-number="cardNumber" x-bind:id="generateDeleteSelector" class="card-footer m-0 p-0 d-none">
+                        <div x-bind:data-card-number="cardData.liveData.UlasimKartiNumarasi" x-bind:id="generateDeleteSelector" class="card-footer m-0 p-0 d-none">
                             <div class="d-grid gap-2">
-                                <button @click="delCard" x-bind:data-card-number="cardNumber" type="button" class="btn btn-sm btn-danger">Delete</a>
+                                <button @click="delCard" x-bind:data-card-number="cardData.liveData.UlasimKartiNumarasi" type="button" class="btn btn-sm btn-danger">Delete</a>
                             </div>
                         </div>
                     </div>
