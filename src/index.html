@@ -102,7 +102,7 @@
                         </ul>
                         <div x-bind:data-card-number="cardData.liveData.UlasimKartiNumarasi" x-bind:id="generateDeleteSelector" class="card-footer m-0 p-0 d-none">
                             <div class="d-grid gap-2">
-                                <button @click="delCard" x-bind:data-card-number="cardData.liveData.UlasimKartiNumarasi" type="button" class="btn btn-sm btn-danger">Delete</a>
+                                <button x-bind:data-card-number="cardData.liveData.UlasimKartiNumarasi" @click="delCard" type="button" class="btn btn-sm btn-danger">Delete</a>
                             </div>
                         </div>
                     </div>

@@ -70,6 +70,9 @@ document.addEventListener('alpine:init', () => {
             let cardNumber = document.getElementById("izCardNumber").value
 
             if (!this.izCards.hasOwnProperty(cardNumber)) {
+                // disabled add button
+                this.$el.setAttribute("disabled", "disabled")
+
                 // cardNumber not found
                 this.fetchCardDataFromApi(cardNumber)
                     .then(resp => resp.json())
@@ -84,6 +87,9 @@ document.addEventListener('alpine:init', () => {
                             // remove new cardform
                             this.removeNewCardForm()
 
+                            // undisabled add button
+                            this.$el.removeAttribute("disabled")
+
                             // alert message
                             this.showAlertBox("success", "Kartlarım bölümüne başarılı şekilde eklendi.", 3000)
                         } else {
@@ -91,16 +97,27 @@ document.addEventListener('alpine:init', () => {
                         }
                     })
                     .catch(error => {
+                        // undisabled add button
+                        this.$el.removeAttribute("disabled")
+
                         // alert show error message
                         this.showAlertBox("danger", error.message, 3000)
                     })
             } else {
+                // undisabled add button
+                this.$el.removeAttribute("disabled")
+
                 // alert show error message
                 this.showAlertBox("warning", "Bu kart listenizde mevcut.", 3000)
             }
         },
 
-        delCard(cardNumber) {
+        delCard() {
+            let cardNumber = this.$el.getAttribute("data-card-number")
+
+            // update card border
+            this.toggleCardUpdate(cardNumber, "danger", 0)
+
             // remove cardData from izCards List
             delete this.izCards[cardNumber]
 
@@ -124,7 +141,7 @@ document.addEventListener('alpine:init', () => {
                             // this.toggleCardDetail()
 
                             // update card border
-                            this.toggleCardUpdate(cardNumber)
+                            this.toggleCardUpdate(cardNumber, "dark", 3000)
 
                             console.log("izCards", this.izCards, this.$persist)
                             // TODO: add to localstorage before data has to make json stringfy
@@ -186,13 +203,16 @@ document.addEventListener('alpine:init', () => {
             document.getElementById("detail-" + cardNumber).classList.toggle("d-none");
             document.getElementById("delete-" + cardNumber).classList.toggle("d-none");
         },
-        toggleCardUpdate(cardNumber) {
+        toggleCardUpdate(cardNumber, alertType, ttl) {
             let cardBlock = document.getElementById(cardNumber)
 
-            cardBlock.classList.toggle("border-dark")
-            setTimeout(() => {
-                cardBlock.classList.toggle("border-dark")
-            }, 3000)
+            cardBlock.classList.toggle("border-" + alertType)
+            // ttl = -1 => 
+            if (ttl > 0) {
+                setTimeout(() => {
+                    cardBlock.classList.toggle("border-" + alertType)
+                }, ttl)
+            }
         },
 
         // custom date: 17.08.2024 14:51:07 - dd.MM.yyyy HH:mm:ss

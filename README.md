@@ -9,11 +9,16 @@
 - Tarayıcı üzerinde çalışır ve localstorage özelliğini kullanır. (Veriler açtığınız tarayıcı üzerinde kalır. )
 - Kartlarınız son güncelleme tarihine göre listelenir.
 - Api tarafından verilen tüm bilgiler görüntülenir.
+- Kart sıralaması: en güncel kart en üstte listelenir.
 
 ### Eksikler ###
 
 - [] Localstorage entegresi
-- [] Kartlarım sıralaması (sıralama lat update time a göre yapılmalı)
+- [X] Yeni kart ekle butonu kart eklenene kadar disable olmalı.
+- [X] Kartlarım sıralaması (sıralama lat update time a göre yapılmalı)
+- [] Chrome app haline en basit nasıl getirilebilir?
+- [] Github page haline getirilmesi
+- [X] Delete butonunun aktifleştirilmesi
 
 ### Altyapı ###
 
