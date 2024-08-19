@@ -135,7 +135,7 @@
                 try {
                   await navigator
                         .serviceWorker
-                        .register('/BUILD_GITHUB_PATH/serviceworker.js');
+                        .register('/BUILD_GITHUB_PATH/serviceworker.js?v=BUILD_NUMBER');
                 }
                 catch (e) {
                   console.log('SW registration failed');
