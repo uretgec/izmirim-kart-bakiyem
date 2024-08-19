@@ -4,7 +4,7 @@
     "start_url":"/izmirim-kart-bakiyem/",
     "display":"standalone",
     "background_color":"#ffffff",
-    "theme_color":"light",
+    "theme_color":"white",
     "scope": "/izmirim-kart-bakiyem/",
     "description":"İzmirim Kart Bakiye Sorgulama ekranı. Açık veri portalı kullanılarak kartlarınızın bakiyelerini görüntüleyebilirsiniz.",
     "icons":[

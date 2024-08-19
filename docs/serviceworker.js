@@ -10,9 +10,9 @@ var URLS = [
   `${GHPATH}/css/bootstrap.min.css`,
   // `${GHPATH}/img/icon-192x192.png`,
   // `${GHPATH}/img/icon-512x512.png`,
-  `${GHPATH}/js/mask.alpine.min.js`
-  `${GHPATH}/js/csp.alpine.min.js`
-  `${GHPATH}/js/main.js`
+  `${GHPATH}/js/mask.alpine.min.js`,
+  `${GHPATH}/js/csp.alpine.min.js`,
+  `${GHPATH}/js/main.js`,
 ]
 
 var CACHE_NAME = APP_PREFIX + VERSION

@@ -4,7 +4,7 @@
     "start_url":"/BUILD_GITHUB_PATH/",
     "display":"standalone",
     "background_color":"#ffffff",
-    "theme_color":"light",
+    "theme_color":"white",
     "scope": "/BUILD_GITHUB_PATH/",
     "description":"İzmirim Kart Bakiye Sorgulama ekranı. Açık veri portalı kullanılarak kartlarınızın bakiyelerini görüntüleyebilirsiniz.",
     "icons":[

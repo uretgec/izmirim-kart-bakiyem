@@ -28,3 +28,9 @@
 
 - [Alpinejs](https://github.com/alpinejs/alpine) 3.14.1
 - [Bootstrap](https://getbootstrap.com/docs/5.3/getting-started/introduction/) 5.3.3
+
+### Websitesi Oluşturma ###
+
+```bash
+./release.sh 1.0.3 // 1.0.3 yerine kendi versiyon numaranızı yazınız.
+```
