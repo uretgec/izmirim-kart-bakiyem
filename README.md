@@ -1,6 +1,17 @@
 # İZMİRİM KART BAKİYEM #
 
+<p align="center"><img src='screenshots/izmbs_logo.png' width='256' alt="IZMKS Logo"></p>
+
 İzmirim Kart bakiye sorgulama ekranı. İzmir Büyükşehir Belediyesinin "Açık Veri Portalı" içinde yer alan "İzmirim Kart Bakiye Sorgulama" servisini kullanarak kartlarınızın bakiyesini kontrol edebilirsiniz.
+
+## PWA Mobil Kurulum ##
+
+![Adım-1](screenshots/screenshot-1.jpeg)
+![Adım-1](screenshots/screenshot-2.jpeg)
+![Adım-1](screenshots/screenshot-3.jpeg)
+![Adım-1](screenshots/screenshot-4.jpeg)
+![Adım-1](screenshots/screenshot-5.jpeg)
+![Adım-1](screenshots/screenshot-6.jpeg)
 
 ## Özellikler ##
 
@@ -10,27 +21,35 @@
 - Kartlarınız son güncelleme tarihine göre listelenir.
 - Api tarafından verilen tüm bilgiler görüntülenir.
 - Kart sıralaması: en güncel kart en üstte listelenir.
+- Websitesi Github Pages tarafından servis edilir.
+- PWA özelliği vardır. Bilgisayarında veya mobil cihazında "Add To Home Screen" özelliğini kullanarak uygulama olarak kullanıbilirsin.
 
 ### Eksikler ###
 
 - [X] Localstorage entegresi
 - [X] Yeni kart ekle butonu kart eklenene kadar disable olmalı
 - [X] Kartlarım sıralaması (sıralama lat update time a göre yapılmalı)
-- [] Chrome app haline en basit nasıl getirilebilir?
+- [X] Chrome app haline en basit nasıl getirilebilir?
 - [X] manifest dosyasının düzenlenmesi
 - [X] yapay zekadan 1 tane logo üretmesini iste
 - [X] Github page haline getirilmesi
 - [X] Delete butonunun aktifleştirilmesi
 - [X] console log temizliği
 - [] favicon dosyasının oluşturulması
+- [] Kart düzenleme özelliğinin eklenmesi
+
+### Websitesi Oluşturma ###
+
+`docs` klasörü içine kopyalanan herşeyi al sitene ekle.
+
+```bash
+
+./release.sh 1.0.3 // 1.0.3 yerine kendi versiyon numaranızı yazınız.
+
+```
 
 ### Altyapı ###
 
 - [Alpinejs](https://github.com/alpinejs/alpine) 3.14.1
 - [Bootstrap](https://getbootstrap.com/docs/5.3/getting-started/introduction/) 5.3.3
-
-### Websitesi Oluşturma ###
-
-```bash
-./release.sh 1.0.3 // 1.0.3 yerine kendi versiyon numaranızı yazınız.
-```
+- [Github Pages](https://pages.github.com/)
