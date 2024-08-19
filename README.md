@@ -19,7 +19,7 @@
 - [] Chrome app haline en basit nasıl getirilebilir?
 - [X] manifest dosyasının düzenlenmesi
 - [X] yapay zekadan 1 tane logo üretmesini iste
-- [] Github page haline getirilmesi
+- [X] Github page haline getirilmesi
 - [X] Delete butonunun aktifleştirilmesi
 - [X] console log temizliği
 
