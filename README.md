@@ -22,6 +22,7 @@
 - [X] Github page haline getirilmesi
 - [X] Delete butonunun aktifleştirilmesi
 - [X] console log temizliği
+- [] favicon dosyasının oluşturulması
 
 ### Altyapı ###
 
