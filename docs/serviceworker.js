@@ -1,18 +1,18 @@
 var GHPATH = '/izmirim-kart-bakiyem';
 var APP_PREFIX = 'izmkbs_';
-var VERSION = 'version_1.0.3';
+var VERSION = 'version_1.0.4';
 var URLS = [
   `${GHPATH}/`,
   `${GHPATH}/index.html`,
-  `${GHPATH}/css/fonts/bootstrap-icons.woff`,
-  `${GHPATH}/css/fonts/bootstrap-icons.woff2`,
-  `${GHPATH}/css/bootstrap-icons.min.css`,
-  `${GHPATH}/css/bootstrap.min.css`,
-  // `${GHPATH}/img/icon-192x192.png`,
-  // `${GHPATH}/img/icon-512x512.png`,
-  `${GHPATH}/js/mask.alpine.min.js`,
-  `${GHPATH}/js/csp.alpine.min.js`,
-  `${GHPATH}/js/main.js`,
+  `${GHPATH}/assets/css/fonts/bootstrap-icons.woff`,
+  `${GHPATH}/assets/css/fonts/bootstrap-icons.woff2`,
+  `${GHPATH}/assets/css/bootstrap-icons.min.css`,
+  `${GHPATH}/assets/css/bootstrap.min.css`,
+  // `${GHPATH}/assets/img/icon-192x192.png`,
+  // `${GHPATH}/assets/img/icon-512x512.png`,
+  `${GHPATH}/assets/js/mask.alpine.min.js`,
+  `${GHPATH}/assets/js/csp.alpine.min.js`,
+  `${GHPATH}/assets/js/main.js`,
 ]
 
 var CACHE_NAME = APP_PREFIX + VERSION
