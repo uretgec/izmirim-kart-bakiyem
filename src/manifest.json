@@ -1,20 +1,20 @@
 {
     "name":"İzmirim Kart Bakiye Sorgulama",
     "short_name":"IZMKBS",
-    "start_url":"/izmirim-kart-bakiyem/",
+    "start_url":"/BUILD_GITHUB_PATH/",
     "display":"standalone",
     "background_color":"#ffffff",
     "theme_color":"light",
-    "scope": "/izmirim-kart-bakiyem/",
+    "scope": "/BUILD_GITHUB_PATH/",
     "description":"İzmirim Kart Bakiye Sorgulama ekranı. Açık veri portalı kullanılarak kartlarınızın bakiyelerini görüntüleyebilirsiniz.",
     "icons":[
         {
-            "src":"/izmirim-kart-bakiyem/assets/img/icon-192x192.png",
+            "src":"/BUILD_GITHUB_PATH/assets/img/icon-192x192.png",
             "sizes":"192x192",
             "type":"image/png"
         },
         {
-            "src":"/izmirim-kart-bakiyem/assets/img/icon-512x512.png",
+            "src":"/BUILD_GITHUB_PATH/assets/img/icon-512x512.png",
             "sizes":"512x512",
             "type":"image/png"
         }
