@@ -1,6 +1,6 @@
 var GHPATH = '/izmirim-kart-bakiyem';
 var APP_PREFIX = 'izmkbs_';
-var VERSION = 'version_1.0.4';
+var VERSION = 'version_1.0.5';
 var URLS = [
   `${GHPATH}/`,
   `${GHPATH}/index.html`,

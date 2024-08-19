@@ -30,13 +30,9 @@ then
     -e 's|BUILD_GITHUB_PATH|'$BUILD_GITHUB_PATH'|g' $WHEREIAM/src/serviceworker.js > $WHEREIAM/docs/serviceworker.js
 
     echo "PWA version updated from $BUILD_NUMBER_OLD to $BUILD_NUMBER_NEW"
-    if [ "$ENV" == "prod" ]
-    then
-        echo $BUILD_NUMBER_NEW > $WHEREIAM/VERSION
-        echo "VERSION file updated from $BUILD_NUMBER_OLD to $BUILD_NUMBER_NEW"
-    else
-        echo "VERSION file not updated"
-    fi
+    
+    echo $BUILD_NUMBER_NEW > $WHEREIAM/VERSION
+    echo "VERSION file updated from $BUILD_NUMBER_OLD to $BUILD_NUMBER_NEW"
 
 else
 
