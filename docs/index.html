@@ -6,12 +6,12 @@
     <meta name="description" content="İzmirim Kartlarınızı kayıt edip tek ekranda bakiyelerini takip edebileceğiniz basit bir websitesidir.">
     <title>İzmirim Kartlarım</title>
 
-    <link href="assets/css/bootstrap-icons.min.css?v=1.0.3" rel="stylesheet">
-    <link href="assets/css/bootstrap.min.css?v=1.0.3" rel="stylesheet">
+    <link href="assets/css/bootstrap-icons.min.css?v=1.0.4" rel="stylesheet">
+    <link href="assets/css/bootstrap.min.css?v=1.0.4" rel="stylesheet">
 
-    <script defer src="assets/js/mask.alpine.min.js?v=1.0.3"></script>
-    <script defer src="assets/js/csp.alpine.min.js?v=1.0.3"></script>
-    <script src="assets/js/main.js?v=1.0.3"></script>
+    <script defer src="assets/js/mask.alpine.min.js?v=1.0.4"></script>
+    <script defer src="assets/js/csp.alpine.min.js?v=1.0.4"></script>
+    <script src="assets/js/main.js?v=1.0.4"></script>
 
      <!-- Meta Tags required for
        Progressive Web App -->
@@ -19,7 +19,7 @@
     <meta name="theme-color" content="light">
     
     <!-- Manifest File link -->
-    <link rel="manifest" href="manifest.json?v=1.0.3" crossorigin="use-credentials">
+    <link rel="manifest" href="manifest.json?v=1.0.4" crossorigin="use-credentials">
 
 </head>
     <body x-data="izCardManager">
@@ -135,7 +135,7 @@
                 try {
                   await navigator
                         .serviceWorker
-                        .register('/izmirim-kart-bakiyem/serviceworker.js');
+                        .register('/izmirim-kart-bakiyem/serviceworker.js?v=1.0.4');
                 }
                 catch (e) {
                   console.log('SW registration failed');
