@@ -10,9 +10,16 @@
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
 
     <script defer src="assets/js/mask.alpine.min.js"></script>
-    <script defer src="assets/js/persist.alpine.min.js"></script>
     <script defer src="assets/js/csp.alpine.min.js"></script>
     <script src="assets/js/main.js"></script>
+
+     <!-- Meta Tags required for
+       Progressive Web App -->
+    <meta name="apple-mobile-web-app-status-bar" content="#aa7700">
+    <meta name="theme-color" content="light">
+    
+    <!-- Manifest File link -->
+    <!-- <link rel="manifest" href="manifest.json" crossorigin="use-credentials"> -->
 
 </head>
     <body x-data="izCardManager">
@@ -24,7 +31,7 @@
                 </h2>
                 <template aria-label="alert-box" x-if="alertBox" x-transition>
                     <div x-bind:class="alertType" class="alert">
-                        <p x-text="alertMessage"></p>
+                        <p class="mb-0" x-text="alertMessage"></p>
                     </div>
                 </template>
 
@@ -116,5 +123,25 @@
                 <p><a href="https://acikveri.bizizmir.com/tr/dataset/izmirim-kart-bakiye-sorgulama/resource/4f6b8d92-bf86-4707-98d4-6f1b29758062" target="_blank">Açık Veri Portalı->İzmirim Kart Bakiye Sorgulama</a> servisini kullanan açık kaynak bir web sayfasıdır.</p>
             </footer>
         </div>
+
+        <script>
+            window.addEventListener('load', () => {
+              registerSW();
+            });
+         
+            // Register the Service Worker
+            async function registerSW() {
+              if ('serviceWorker' in navigator) {
+                try {
+                  await navigator
+                        .serviceWorker
+                        .register('serviceworker.js');
+                }
+                catch (e) {
+                  console.log('SW registration failed');
+                }
+              }
+            }
+        </script>
     </body>
 </html>

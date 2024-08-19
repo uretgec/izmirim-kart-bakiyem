@@ -11,10 +11,12 @@
 // Alpine Init
 document.addEventListener('alpine:init', () => {
     Alpine.data('izCardManager', () => ({
-        izCardInit: false,
-
         // init iz cards data from localstorage
         init() {
+            // loads izCards data from storage
+            this.izCards = this.__storageGet(this.__localDatabaseName)
+
+            // new card form is visible
             if (Object.keys(this.izCards).length > 0) {
                 this.newCardForm = false
             }
@@ -63,8 +65,6 @@ document.addEventListener('alpine:init', () => {
          * {"card-number": {"cardName":"----", "liveData":"apiResponse"}}
          */
         addCard() {
-            console.log("izCards", this.izCards)
-
             // card name and number data
             let cardName = document.getElementById("izCardName").value
             let cardNumber = document.getElementById("izCardNumber").value
@@ -80,9 +80,6 @@ document.addEventListener('alpine:init', () => {
                         if (response.hasOwnProperty("HataVarMi") && !response.HataVarMi) {
                             // add card data
                             this._updateCardData(cardName, cardNumber, response)
-    
-                            console.log("izCards", this.izCards, this.$persist)
-                            // TODO: add to localstorage before data has to make json stringfy
 
                             // remove new cardform
                             this.removeNewCardForm()
@@ -121,7 +118,11 @@ document.addEventListener('alpine:init', () => {
             // remove cardData from izCards List
             delete this.izCards[cardNumber]
 
-            // TODO: read to localstorage before data has to make json stringfy
+            // update izCards data to database
+            this.__storageSet(this.__localDatabaseName, this.izCards)
+
+            // alert show success message
+            this.showAlertBox("warning", cardNumber + " numaralı kart listenizden kaldırıldı.", 3000)
         },
 
         getCard() {
@@ -143,9 +144,6 @@ document.addEventListener('alpine:init', () => {
                             // update card border
                             this.toggleCardUpdate(cardNumber, "dark", 3000)
 
-                            console.log("izCards", this.izCards, this.$persist)
-                            // TODO: add to localstorage before data has to make json stringfy
-
                             return this.izCards[cardNumber]
                         } else {
                             this.showAlertBox("warning", "Şu an kart bakiye bilgisine ulaşılamıyor.", 5000)
@@ -164,7 +162,6 @@ document.addEventListener('alpine:init', () => {
             // update last update time
             let lastUpdateTime = this.__customDateParse(cardData.UlasimKartBakiyesi.SonIslemTarihi)
             let lastUpdateTime2 = this.__customDateParse(cardData.UlasimKartBakiyesi.SonYuklemeTarihi)
-            console.log("Parse Date", lastUpdateTime, lastUpdateTime2)
             if (lastUpdateTime2 > lastUpdateTime) {
                 lastUpdateTime = lastUpdateTime2
             }
@@ -184,6 +181,9 @@ document.addEventListener('alpine:init', () => {
             this.izCards = Object.entries(this.izCards).sort((a,b) => {
                 return b[1].updateTime - a[1].updateTime
             }).reduce((r, [k, v]) => ({ ...r, [k]: v }), {})
+
+            // update izCards data to database
+            this.__storageSet(this.__localDatabaseName, this.izCards)
         },
 
         listCards() {
@@ -217,7 +217,6 @@ document.addEventListener('alpine:init', () => {
 
         // custom date: 17.08.2024 14:51:07 - dd.MM.yyyy HH:mm:ss
         __customDateParse(customDate) {
-            console.log("customDate", customDate)
             if (customDate === 0 || customDate === null) {
                 return 0
             }
@@ -226,7 +225,6 @@ document.addEventListener('alpine:init', () => {
             // year: number, monthIndex: number, date?: number, hours?: number, minutes?: number, seconds?: number, ms?: number
             let aDate = new Date(strDate[2], strDate[1]-1, strDate[0], strDate[3], strDate[4], strDate[5])
             
-            console.log("aDate", aDate, aDate.getTime())
             return aDate.getTime()
         },
 
@@ -242,9 +240,25 @@ document.addEventListener('alpine:init', () => {
         async fetchCardDataFromApi(cardNumber) {
             // https://openapi.izmir.bel.tr/api/iztek/bakiyesorgulama/{aliasNo}
             return await fetch("https://openapi.izmir.bel.tr/api/iztek/bakiyesorgulama/{aliasNo}".replace("{aliasNo}", cardNumber), {method: "GET"})
+        },
+
+        // localstorage init
+        __localDatabaseName: "myizcards",
+        __storageHas(key) {
+            return localStorage.getItem(key) !== null
+        },
+        __storageGet(key) {
+            let value = localStorage.getItem(key)
+        
+            if (value === undefined) return
+        
+            return JSON.parse(value)
+        },
+        
+        __storageSet(key, value) {
+            localStorage.setItem(key, JSON.stringify(value))
         }
 
-        // utils
     }))
 })
 
