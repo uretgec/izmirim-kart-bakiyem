@@ -250,7 +250,8 @@ document.addEventListener('alpine:init', () => {
         __storageGet(key) {
             let value = localStorage.getItem(key)
         
-            if (value === undefined) return
+            if (value === undefined) return {}
+            if (value === null) return {}
         
             return JSON.parse(value)
         },
