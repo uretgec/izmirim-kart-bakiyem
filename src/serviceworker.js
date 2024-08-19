@@ -1,6 +1,6 @@
-var GHPATH = '/izmirim-kart-bakiyem';
+var GHPATH = '/BUILD_GITHUB_PATH';
 var APP_PREFIX = 'izmkbs_';
-var VERSION = 'version_1.0.3';
+var VERSION = 'version_BUILD_NUMBER';
 var URLS = [
   `${GHPATH}/`,
   `${GHPATH}/index.html`,
@@ -23,7 +23,7 @@ self.addEventListener('fetch', function (e) {
       if (request) { 
         console.log('Responding with cache : ' + e.request.url);
         return request
-      } else {
+      } else {       
         console.log('File is not cached, fetching : ' + e.request.url);
         return fetch(e.request)
       }
