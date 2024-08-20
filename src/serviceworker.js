@@ -21,10 +21,10 @@ self.addEventListener('fetch', function (e) {
   e.respondWith(
     caches.match(e.request).then(function (request) {
       if (request) { 
-        console.log('Responding with cache : ' + e.request.url);
+        // console.log('Responding with cache : ' + e.request.url);
         return request
       } else {
-        console.log('File is not cached, fetching : ' + e.request.url);
+        // console.log('File is not cached, fetching : ' + e.request.url);
         return fetch(e.request)
       }
     })
