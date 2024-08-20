@@ -37,10 +37,10 @@
 - [X] console log temizliği
 - [] favicon dosyasının oluşturulması
 - [] Kart düzenleme özelliğinin eklenmesi
-- [] PWA için [RicherUI](https://web.dev/patterns/web-apps/richer-install-ui) entegresi
-- [] PWA için [ID](https://developer.chrome.com/docs/capabilities/pwa-manifest-id?utm_source=devtools) entegresi
-- [] PWA için [Protocol Handler](https://developer.chrome.com/docs/web-platform/best-practices/url-protocol-handler?utm_source=devtools) entegresi
-- [] PWA için [Display Overwrite](https://learn.microsoft.com/en-us/microsoft-edge/progressive-web-apps-chromium/how-to/window-controls-overlay) entegresi
+- [-] PWA için [RicherUI](https://web.dev/patterns/web-apps/richer-install-ui) entegresi
+- [-] PWA için [ID](https://developer.chrome.com/docs/capabilities/pwa-manifest-id?utm_source=devtools) entegresi
+- [-] PWA için [Protocol Handler](https://developer.chrome.com/docs/web-platform/best-practices/url-protocol-handler?utm_source=devtools) entegresi
+- [X] PWA için [Display Overwrite](https://learn.microsoft.com/en-us/microsoft-edge/progressive-web-apps-chromium/how-to/window-controls-overlay) entegresi
 
 ### Websitesi Oluşturma ###
 
